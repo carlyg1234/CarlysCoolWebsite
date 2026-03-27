@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Phaser Game</title>
     <style>
-        /* Reset CSS */
+        /* Full screen game styles */
         *,
         *::before,
         *::after {
@@ -17,51 +17,56 @@
         html, body {
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
 
         body {
-            line-height: 1;
             font-family: Arial, sans-serif;
             background-color: #040218;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
-
-        .game-header {
-            color: white;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .back-button {
-            background: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        .back-button:hover {
-            background: #2980b9;
         }
 
         #game-container {
-            border: 2px solid #3498db;
-            border-radius: 8px;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Escape instruction overlay */
+        .escape-hint {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
         }
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="window.location.href='index.html'">← Back to Website</button>
-    <div class="game-header">
-        <h1>My Phaser Game</h1>
-    </div>
+    <div class="escape-hint">Press ESC to return to website</div>
     <div id="game-container"></div>
+    
+    <script>
+        // Add escape key functionality
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+    
     <script src="./phaser.js"></script>
     <script type="module" src="./src/main.js"></script>
 </body>
